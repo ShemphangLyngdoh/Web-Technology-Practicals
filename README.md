@@ -32,6 +32,7 @@ This repository contains all my Web Technology practical programs developed as p
 ## 🌐 Live Project
 
 👉 [Click here to view the project](https://shemphanglyngdoh.github.io/Web-Technology-Practicals/)
+or here - https://shemphanglyngdoh.github.io/Web-Technology-Practicals/
 
 ## 📌 Note
 
