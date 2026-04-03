@@ -5,155 +5,166 @@
 <title>Web Tech Dashboard</title>
 
 <style>
-* {margin:0; padding:0; box-sizing:border-box; font-family:sans-serif;}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
 
+/* ANIMATED BACKGROUND */
 body {
-    background: #0f172a;
+    height: 100vh;
+    background: linear-gradient(-45deg, #0f172a, #1e3a8a, #0ea5e9, #020617);
+    background-size: 400% 400%;
+    animation: gradientBG 10s ease infinite;
     color: white;
 }
 
-/* LOGIN SCREEN */
-#login {
-    display:flex;
-    height:100vh;
-    justify-content:center;
-    align-items:center;
-}
-
-.login-box {
-    background:#1e293b;
-    padding:30px;
-    border-radius:10px;
-    text-align:center;
-}
-
-.login-box input {
-    display:block;
-    margin:10px auto;
-    padding:10px;
-    width:200px;
-}
-
-.login-box button {
-    padding:10px;
-    background:#38bdf8;
-    border:none;
-    color:white;
-    cursor:pointer;
-}
-
-/* DASHBOARD */
-#dashboard {
-    display:none;
-}
-
-/* NAVBAR */
-.navbar {
-    display:flex;
-    justify-content:space-between;
-    padding:15px;
-    background:#020617;
+@keyframes gradientBG {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
 }
 
 /* SIDEBAR */
 .sidebar {
-    width:200px;
-    background:#020617;
-    height:100vh;
-    float:left;
-    padding:20px;
+    width: 220px;
+    height: 100vh;
+    position: fixed;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(15px);
+    padding: 20px;
+}
+
+.sidebar h2 {
+    margin-bottom: 20px;
 }
 
 .sidebar a {
-    display:block;
-    margin:10px 0;
-    color:#94a3b8;
-    text-decoration:none;
+    display: block;
+    color: #94a3b8;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    transition: 0.3s;
 }
 
-/* CONTENT */
-.content {
-    margin-left:200px;
-    padding:20px;
+.sidebar a:hover {
+    background: #0ea5e9;
+    color: white;
 }
 
-/* CARDS */
+/* MAIN */
+.main {
+    margin-left: 240px;
+    padding: 30px;
+}
+
+/* HEADER */
+.header {
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: 28px;
+}
+
+/* GRID */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+/* CARD */
 .card {
-    background:#1e293b;
-    padding:20px;
-    margin:10px;
-    display:inline-block;
-    border-radius:10px;
+    padding: 30px;
+    border-radius: 15px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    text-align: center;
+    transition: 0.4s;
+    position: relative;
+    overflow: hidden;
 }
 
+/* GLOW EFFECT */
+.card::before {
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, #0ea5e9, #22c55e, #facc15);
+    top: -50%;
+    left: -50%;
+    z-index: 0;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.card:hover::before {
+    opacity: 0.3;
+    transform: rotate(25deg);
+}
+
+/* CARD HOVER */
 .card:hover {
-    background:#334155;
+    transform: translateY(-12px) scale(1.05);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+}
+
+/* LINK */
+.card a {
+    position: relative;
+    z-index: 1;
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* FOOTER */
+.footer {
+    margin-top: 40px;
+    text-align: center;
+    color: #ccc;
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
-<div id="login">
-    <div class="login-box">
-        <h2>Login</h2>
-        <input type="text" id="username" placeholder="Enter Name">
-        <button onclick="login()">Enter</button>
-    </div>
-</div>
-
-<!-- DASHBOARD -->
-<div id="dashboard">
-
-<div class="navbar">
-    <h3>Dashboard</h3>
-    <span id="user"></span>
-</div>
-
+<!-- SIDEBAR -->
 <div class="sidebar">
-    <a href="#">Home</a>
-    <a href="#">Practicals</a>
-    <a href="#" onclick="logout()">Logout</a>
+    <h2>⚡ Dashboard</h2>
+    <a href="#">🏠 Home</a>
+    <a href="#">📂 Practicals</a>
 </div>
 
-<div class="content">
-    <h2>Web Technology Practicals</h2>
+<!-- MAIN -->
+<div class="main">
 
-    <div class="card"><a href="HTML/practical15.html">Practical 15</a></div>
-    <div class="card"><a href="HTML/practical16.html">Practical 16</a></div>
-    <div class="card"><a href="HTML/practical17.html">Practical 17</a></div>
-    <div class="card"><a href="HTML/practical18.html">Practical 18</a></div>
-    <div class="card"><a href="HTML/practical18b.html">Practical 18b</a></div>
-    <div class="card"><a href="HTML/practical19.html">Practical 19</a></div>
+    <div class="header">
+        <h1>🚀 Web Technology Practicals</h1>
+        <p>By Shemphang Lyngdoh</p>
+    </div>
+
+    <div class="grid">
+        <div class="card"><a href="HTML/practical15.html">Practical 15</a></div>
+        <div class="card"><a href="HTML/practical16.html">Practical 16</a></div>
+        <div class="card"><a href="HTML/practical17.html">Practical 17</a></div>
+        <div class="card"><a href="HTML/practical18.html">Practical 18</a></div>
+        <div class="card"><a href="HTML/practical18b.html">Practical 18b</a></div>
+        <div class="card"><a href="HTML/practical19.html">Practical 19</a></div>
+    </div>
+
+    <div class="footer">
+        © 2026 Shemphang Lyngdoh
+    </div>
 
 </div>
-
-</div>
-
-<script>
-function login() {
-    let name = document.getElementById("username").value;
-    localStorage.setItem("user", name);
-    showDashboard();
-}
-
-function logout() {
-    localStorage.removeItem("user");
-    location.reload();
-}
-
-function showDashboard() {
-    document.getElementById("login").style.display = "none";
-    document.getElementById("dashboard").style.display = "block";
-    document.getElementById("user").innerText = localStorage.getItem("user");
-}
-
-// AUTO LOGIN
-if(localStorage.getItem("user")) {
-    showDashboard();
-}
-</script>
 
 </body>
 </html>
