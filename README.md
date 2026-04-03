@@ -1,24 +1,44 @@
-# 💻 Web Technology Practicals
+# 🚀 Web Technology Dashboard Project
 
-This repository contains all my Web Technology practical programs developed as part of my coursework.
+This repository contains my Web Technology practical project developed as part of the BCA coursework.
+The project includes a modern interactive dashboard for accessing all practical programs.
 
-## 👨‍💻 Student Details
+---
+
+## 👨‍🎓 Student Details
 
 * **Name:** Shemphang Lyngdoh
-* **Course:** (Write your course)
+* **Course:** BCA
 * **Subject:** Web Technology
+
+---
+
+## 💻 Project Description
+
+This project is designed as a **dashboard interface** that provides easy navigation to all practical programs.
+It combines HTML, CSS, and JavaScript to create an interactive and visually appealing user interface.
+
+---
+
+## ✨ Features
+
+* Interactive dashboard layout
+* Typing animation effect
+* Particle background animation
+* Mouse glow effect
+* 3D card hover effect
+* Click sound and page transition
+* Clean and structured UI
+
+---
 
 ## 📂 Project Structure
 
-* HTML files are stored in the **HTML/** folder
-* CSS files are stored in the **CSS/** folder
+* `index.html` → Main dashboard
+* `HTML/` → All practical HTML files
+* `CSS/` → Stylesheets for practicals
 
-## 🚀 Features
-
-* Organized folder structure (HTML & CSS)
-* Modern dashboard UI for navigation
-* Responsive and clean design
-* Each practical is linked for easy access
+---
 
 ## 📘 Practicals Included
 
@@ -29,14 +49,25 @@ This repository contains all my Web Technology practical programs developed as p
 * Practical 18b
 * Practical 19
 
+---
+
+## 🛠️ Technologies Used
+
+* HTML
+* CSS
+* JavaScript
+
+---
+
 ## 🌐 Live Project
 
-👉 [Click here to view the project](https://shemphanglyngdoh.github.io/Web-Technology-Practicals/)
-or https://shemphanglyngdoh.github.io/Web-Technology-Practicals/
+👉 https://ShemphangLyngdoh.github.io/Web-Technology-Practicals/
+
+---
 
 ## 📌 Note
 
-This project is created for educational purposes and demonstrates basic to intermediate web development skills using HTML and CSS.
+This project is created for academic purposes and demonstrates basic to intermediate web development concepts along with interactive UI design.
 
 ---
 
