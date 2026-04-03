@@ -1,0 +1,60 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Top Name */
+h3 {
+    padding: 12px;
+    color: white;
+    background: linear-gradient(135deg, #ff6a00, #ee0979);
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+/* Header */
+.header {
+    background: linear-gradient(135deg, #1e3c72, #1f1f21);
+    color: white;
+    text-align: center;
+    padding: 25px;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Main Content */
+.content {
+    width: 100%;
+    min-height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #f7971e, #ffd200);
+}
+
+/* JS Output Box */
+.content p {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0px 8px 25px rgba(0,0,0,0.3);
+    font-size: 18px;
+    color: #333;
+    text-align: center;
+    transition: 0.3s;
+}
+
+/* Hover Effect */
+.content p:hover {
+    transform: scale(1.05);
+}
+
+/* Footer */
+.footer {
+    background: linear-gradient(135deg, #11998e, #38ef7d);
+    color: white;
+    text-align: center;
+    padding: 18px;
+    font-size: 14px;
+}
