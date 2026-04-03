@@ -2,154 +2,134 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Web Tech Dashboard</title>
+<title>Ultimate Dashboard</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
-}
+* {margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif;}
 
-/* ANIMATED BACKGROUND */
 body {
-    height: 100vh;
-    background: linear-gradient(-45deg, #0f172a, #1e3a8a, #0ea5e9, #020617);
-    background-size: 400% 400%;
-    animation: gradientBG 10s ease infinite;
-    color: white;
+    background:#020617;
+    color:white;
+    overflow:hidden;
 }
 
-@keyframes gradientBG {
-    0% {background-position: 0% 50%;}
-    50% {background-position: 100% 50%;}
-    100% {background-position: 0% 50%;}
+/* LOADER */
+#loader {
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:#020617;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+}
+
+/* TRANSITION */
+#transition {
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:black;
+    top:0;
+    left:0;
+    z-index:998;
+    opacity:0;
+    pointer-events:none;
+    transition:0.5s;
+}
+
+/* PARTICLES */
+#particles {
+    position:fixed;
+    width:100%;
+    height:100%;
+    z-index:-1;
 }
 
 /* SIDEBAR */
 .sidebar {
-    width: 220px;
-    height: 100vh;
-    position: fixed;
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(15px);
-    padding: 20px;
-}
-
-.sidebar h2 {
-    margin-bottom: 20px;
+    width:220px;
+    height:100vh;
+    position:fixed;
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(12px);
+    padding:20px;
 }
 
 .sidebar a {
-    display: block;
-    color: #94a3b8;
-    padding: 10px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    text-decoration: none;
-    transition: 0.3s;
-}
-
-.sidebar a:hover {
-    background: #0ea5e9;
-    color: white;
+    display:block;
+    margin:10px 0;
+    color:#94a3b8;
+    text-decoration:none;
 }
 
 /* MAIN */
 .main {
-    margin-left: 240px;
-    padding: 30px;
+    margin-left:240px;
+    padding:30px;
 }
 
-/* HEADER */
-.header {
-    margin-bottom: 30px;
-}
-
-.header h1 {
-    font-size: 28px;
+/* TYPING */
+#typing {
+    font-size:28px;
+    margin-bottom:20px;
 }
 
 /* GRID */
 .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 25px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
 }
 
 /* CARD */
 .card {
-    padding: 30px;
-    border-radius: 15px;
-    background: rgba(255,255,255,0.1);
-    backdrop-filter: blur(10px);
-    text-align: center;
-    transition: 0.4s;
-    position: relative;
-    overflow: hidden;
+    padding:30px;
+    border-radius:15px;
+    background:rgba(255,255,255,0.05);
+    text-align:center;
+    transition:0.3s;
+    transform-style:preserve-3d;
 }
 
-/* GLOW EFFECT */
-.card::before {
-    content: "";
-    position: absolute;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(45deg, #0ea5e9, #22c55e, #facc15);
-    top: -50%;
-    left: -50%;
-    z-index: 0;
-    opacity: 0;
-    transition: 0.5s;
-}
-
-.card:hover::before {
-    opacity: 0.3;
-    transform: rotate(25deg);
-}
-
-/* CARD HOVER */
 .card:hover {
-    transform: translateY(-12px) scale(1.05);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+    box-shadow:0 0 25px #0ea5e9;
 }
 
-/* LINK */
 .card a {
-    position: relative;
-    z-index: 1;
-    text-decoration: none;
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
 }
 
-/* FOOTER */
-.footer {
-    margin-top: 40px;
-    text-align: center;
-    color: #ccc;
+/* GLOW */
+.glow {
+    position:fixed;
+    width:150px;
+    height:150px;
+    background:radial-gradient(circle, rgba(14,165,233,0.5), transparent);
+    pointer-events:none;
+    border-radius:50%;
 }
 </style>
 </head>
 
 <body>
 
-<!-- SIDEBAR -->
+<div id="loader">Loading...</div>
+<div id="transition"></div>
+
+<canvas id="particles"></canvas>
+<div class="glow" id="glow"></div>
+
 <div class="sidebar">
-    <h2>⚡ Dashboard</h2>
-    <a href="#">🏠 Home</a>
-    <a href="#">📂 Practicals</a>
+    <h2>🚀 Dashboard</h2>
 </div>
 
-<!-- MAIN -->
 <div class="main">
 
-    <div class="header">
-        <h1>🚀 Web Technology Practicals</h1>
-        <p>By Shemphang Lyngdoh</p>
-    </div>
+    <div id="typing"></div>
 
     <div class="grid">
         <div class="card"><a href="HTML/practical15.html">Practical 15</a></div>
@@ -160,11 +140,87 @@ body {
         <div class="card"><a href="HTML/practical19.html">Practical 19</a></div>
     </div>
 
-    <div class="footer">
-        © 2026 Shemphang Lyngdoh
-    </div>
-
 </div>
+
+<audio id="clickSound" src="https://www.soundjay.com/buttons/sounds/button-16.mp3"></audio>
+
+<script>
+// LOADER
+window.onload = () => {
+    document.getElementById("loader").style.display = "none";
+};
+
+// TYPING EFFECT
+let text = "⚡ Web Technology Practicals - Shemphang Lyngdoh";
+let i = 0;
+function typing() {
+    if(i < text.length){
+        document.getElementById("typing").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typing, 40);
+    }
+}
+typing();
+
+// PARTICLES
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+for(let i=0;i<100;i++){
+    particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,size:Math.random()*2});
+}
+
+function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle="#38bdf8";
+    particles.forEach(p=>{
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+        ctx.fill();
+        p.y+=0.5;
+        if(p.y>canvas.height)p.y=0;
+    });
+    requestAnimationFrame(animate);
+}
+animate();
+
+// GLOW
+document.addEventListener("mousemove", e=>{
+    let glow=document.getElementById("glow");
+    glow.style.left=e.clientX+"px";
+    glow.style.top=e.clientY+"px";
+});
+
+// CLICK SOUND + TRANSITION
+document.querySelectorAll("a").forEach(link=>{
+    link.addEventListener("click", e=>{
+        e.preventDefault();
+        document.getElementById("clickSound").play();
+        let t=document.getElementById("transition");
+        t.style.opacity=1;
+        setTimeout(()=>{window.location=link.href},500);
+    });
+});
+
+// 3D TILT
+document.querySelectorAll(".card").forEach(card=>{
+    card.addEventListener("mousemove", e=>{
+        let x=e.offsetX;
+        let y=e.offsetY;
+        let centerX=card.offsetWidth/2;
+        let centerY=card.offsetHeight/2;
+        let rotateX=(y-centerY)/10;
+        let rotateY=(centerX-x)/10;
+        card.style.transform=`rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    });
+    card.addEventListener("mouseleave", ()=>{
+        card.style.transform="rotateX(0) rotateY(0)";
+    });
+});
+</script>
 
 </body>
 </html>
