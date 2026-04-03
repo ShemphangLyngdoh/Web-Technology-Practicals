@@ -1,0 +1,80 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #cfcfcf;
+}
+
+/* Header */
+header {
+    background-color: #1e7d32;
+    color: white;
+    text-align: center;
+    padding: 35px 0;   /* increased for exact look */
+}
+
+/* Main Section */
+.main {
+    height: calc(100vh - 160px);  /* 🔥 EXACT CENTERING FIX */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Form Background Wrapper */
+form {
+    background-color: #5e4bb7;   /* 🔥 full purple area */
+    padding: 20px;
+}
+
+/* Fieldset */
+fieldset {
+    border: 2px solid white;
+    width: 350px;
+    padding: 20px;
+}
+
+/* Legend */
+legend {
+    font-size: 18px;
+    padding: 0 8px;
+}
+
+/* Labels */
+label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+/* Inputs */
+input {
+    width: 100%;
+    padding: 10px;
+    background-color: #dcdcdc;
+    border: none;
+}
+
+/* Button */
+button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #cfcfcf;
+    border: none;
+    cursor: pointer;
+}
+
+/* Footer */
+footer {
+    background-color: #1e7d32;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
