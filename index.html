@@ -1,21 +1,159 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Web Technology Practicals</title>
+<meta charset="UTF-8">
+<title>Web Tech Dashboard</title>
+
+<style>
+* {margin:0; padding:0; box-sizing:border-box; font-family:sans-serif;}
+
+body {
+    background: #0f172a;
+    color: white;
+}
+
+/* LOGIN SCREEN */
+#login {
+    display:flex;
+    height:100vh;
+    justify-content:center;
+    align-items:center;
+}
+
+.login-box {
+    background:#1e293b;
+    padding:30px;
+    border-radius:10px;
+    text-align:center;
+}
+
+.login-box input {
+    display:block;
+    margin:10px auto;
+    padding:10px;
+    width:200px;
+}
+
+.login-box button {
+    padding:10px;
+    background:#38bdf8;
+    border:none;
+    color:white;
+    cursor:pointer;
+}
+
+/* DASHBOARD */
+#dashboard {
+    display:none;
+}
+
+/* NAVBAR */
+.navbar {
+    display:flex;
+    justify-content:space-between;
+    padding:15px;
+    background:#020617;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width:200px;
+    background:#020617;
+    height:100vh;
+    float:left;
+    padding:20px;
+}
+
+.sidebar a {
+    display:block;
+    margin:10px 0;
+    color:#94a3b8;
+    text-decoration:none;
+}
+
+/* CONTENT */
+.content {
+    margin-left:200px;
+    padding:20px;
+}
+
+/* CARDS */
+.card {
+    background:#1e293b;
+    padding:20px;
+    margin:10px;
+    display:inline-block;
+    border-radius:10px;
+}
+
+.card:hover {
+    background:#334155;
+}
+</style>
 </head>
-<body style="font-family: Arial; text-align: center;">
 
-    <h1>Web Technology Practicals</h1>
-    <h3>Name: Shemphang lyngdoh</h3>
+<body>
 
-    <ul style="list-style: none; font-size: 20px;">
-        <li><a href="HTML/practical15.html">Practical 15</a></li>
-        <li><a href="HTML/practical16.html">Practical 16</a></li>
-        <li><a href="HTML/practical17.html">Practical 17</a></li>
-        <li><a href="HTML/practical18.html">Practical 18</a></li>
-        <li><a href="HTML/practical18b.html">Practical 18b</a></li>
-        <li><a href="HTML/practical19.html">Practical 19</a></li>
-    </ul>
+<!-- LOGIN -->
+<div id="login">
+    <div class="login-box">
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Enter Name">
+        <button onclick="login()">Enter</button>
+    </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+
+<div class="navbar">
+    <h3>Dashboard</h3>
+    <span id="user"></span>
+</div>
+
+<div class="sidebar">
+    <a href="#">Home</a>
+    <a href="#">Practicals</a>
+    <a href="#" onclick="logout()">Logout</a>
+</div>
+
+<div class="content">
+    <h2>Web Technology Practicals</h2>
+
+    <div class="card"><a href="HTML/practical15.html">Practical 15</a></div>
+    <div class="card"><a href="HTML/practical16.html">Practical 16</a></div>
+    <div class="card"><a href="HTML/practical17.html">Practical 17</a></div>
+    <div class="card"><a href="HTML/practical18.html">Practical 18</a></div>
+    <div class="card"><a href="HTML/practical18b.html">Practical 18b</a></div>
+    <div class="card"><a href="HTML/practical19.html">Practical 19</a></div>
+
+</div>
+
+</div>
+
+<script>
+function login() {
+    let name = document.getElementById("username").value;
+    localStorage.setItem("user", name);
+    showDashboard();
+}
+
+function logout() {
+    localStorage.removeItem("user");
+    location.reload();
+}
+
+function showDashboard() {
+    document.getElementById("login").style.display = "none";
+    document.getElementById("dashboard").style.display = "block";
+    document.getElementById("user").innerText = localStorage.getItem("user");
+}
+
+// AUTO LOGIN
+if(localStorage.getItem("user")) {
+    showDashboard();
+}
+</script>
 
 </body>
 </html>
