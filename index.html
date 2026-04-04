@@ -256,6 +256,11 @@ window.onload = ()=>{
     document.getElementById("loader").style.display="none";
 };
 
+/* FIX: BACK BUTTON (REMOVE BLACK SCREEN) */
+window.onpageshow = function(){
+    document.getElementById("transition").style.opacity=0;
+};
+
 /* TYPING */
 let text="⚡ Web Technology Practicals - Shemphang Lyngdoh";
 let i=0;
@@ -302,12 +307,22 @@ document.addEventListener("mousemove",e=>{
     glow.style.top=e.clientY+"px";
 });
 
-/* CLICK SOUND + TRANSITION */
+/* FIXED CLICK (BACK BUTTON WORKS) */
 document.querySelectorAll(".card a").forEach(link=>{
-    link.addEventListener("click",function(){
+    link.addEventListener("click",function(e){
+
+        e.preventDefault(); // IMPORTANT
+
+        let url=this.href;
+
         document.getElementById("clickSound").play();
+
         let t=document.getElementById("transition");
         t.style.opacity=1;
+
+        setTimeout(()=>{
+            window.location.href=url;
+        },500);
     });
 });
 
