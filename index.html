@@ -302,7 +302,7 @@ document.addEventListener("mousemove",e=>{
     glow.style.top=e.clientY+"px";
 });
 
-/* CLICK SOUND + TRANSITION (SAFE) */
+/* CLICK SOUND + TRANSITION */
 document.querySelectorAll(".card a").forEach(link=>{
     link.addEventListener("click",function(){
         document.getElementById("clickSound").play();
@@ -311,7 +311,7 @@ document.querySelectorAll(".card a").forEach(link=>{
     });
 });
 
-/* FIXED 3D TILT */
+/* 3D TILT */
 document.querySelectorAll(".card").forEach(card=>{
     card.addEventListener("mousemove",e=>{
         let x=e.offsetX;
