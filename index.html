@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>INSANE Dashboard</title>
+<title>Ultimate God Mode Dashboard</title>
 
 <style>
 *{
@@ -12,12 +12,26 @@
     font-family:'Segoe UI',sans-serif;
 }
 
+/* BODY ENTER ANIMATION */
 body{
     background:linear-gradient(270deg,#020617,#0f172a,#020617);
     background-size:400% 400%;
-    animation:bgMove 10s infinite linear;
+    animation:bgMove 12s infinite linear, pageEnter 0.8s ease;
     color:white;
-    overflow:hidden;
+    overflow-x:hidden;
+}
+
+@keyframes pageEnter{
+    from{
+        opacity:0;
+        transform:scale(1.05);
+        filter:blur(10px);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+        filter:blur(0);
+    }
 }
 
 @keyframes bgMove{
@@ -25,13 +39,56 @@ body{
     100%{background-position:100%}
 }
 
+/* TRANSITION OVERLAY */
+#transition{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:black;
+    opacity:1; /* start visible */
+    z-index:999;
+    transition:0.6s ease;
+}
+
+/* ORBS */
+.orb{
+    position:fixed;
+    border-radius:50%;
+    filter:blur(80px);
+    opacity:0.4;
+    z-index:-1;
+}
+.orb1{width:300px;height:300px;background:#38bdf8;top:10%;left:10%;}
+.orb2{width:400px;height:400px;background:#6366f1;bottom:10%;right:10%;}
+
 /* NAVBAR */
 .navbar{
     display:flex;
     justify-content:space-between;
-    padding:15px 25px;
-    backdrop-filter:blur(15px);
+    padding:15px 30px;
+    backdrop-filter:blur(12px);
     background:rgba(255,255,255,0.05);
+}
+
+/* TITLE ANIMATION */
+.navbar h2{
+    background:linear-gradient(90deg,#38bdf8,#6366f1,#38bdf8);
+    background-size:200%;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:shine 4s linear infinite;
+}
+
+@keyframes shine{
+    0%{background-position:0%}
+    100%{background-position:200%}
+}
+
+.profile small{
+    opacity:0.7;
+    font-size:12px;
 }
 
 /* SEARCH */
@@ -44,7 +101,7 @@ body{
 /* GRID */
 .grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
     gap:25px;
     padding:30px;
 }
@@ -54,164 +111,275 @@ body{
     padding:25px;
     border-radius:18px;
     background:rgba(255,255,255,0.05);
-    backdrop-filter:blur(10px);
-    transition:0.3s;
+    backdrop-filter:blur(12px);
+    transition:0.4s;
     position:relative;
-    transform-style:preserve-3d;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,0.08);
+    cursor:pointer;
 }
 
+/* SHINE */
+.card::before{
+    content:'';
+    position:absolute;
+    width:200%;
+    height:100%;
+    background:linear-gradient(120deg,transparent,rgba(255,255,255,0.2),transparent);
+    transform:rotate(25deg) translateX(-100%);
+    transition:0.5s;
+}
+.card:hover::before{
+    transform:rotate(25deg) translateX(100%);
+}
+
+/* HOVER */
 .card:hover{
-    box-shadow:0 0 40px #38bdf8;
+    box-shadow:
+    0 0 10px #38bdf8,
+    0 0 30px rgba(56,189,248,0.5),
+    inset 0 0 10px rgba(56,189,248,0.2);
 }
 
-/* TAG */
+/* TAGS */
 .tag{
+    display:inline-block;
+    padding:5px 10px;
+    border-radius:20px;
     font-size:12px;
-    background:#0ea5e9;
-    padding:4px 8px;
-    border-radius:6px;
-    margin:2px;
+    margin-top:10px;
+    margin-right:5px;
+}
+.html{background:#ef4444;}
+.css{background:#6366f1;}
+.js{background:#facc15;color:black;}
+
+/* ENTRY CARDS */
+.card{
+    opacity:0;
+    transform:translateY(40px);
+    animation:fadeIn 0.6s forwards;
+}
+.card:nth-child(1){animation-delay:0.1s;}
+.card:nth-child(2){animation-delay:0.2s;}
+.card:nth-child(3){animation-delay:0.3s;}
+.card:nth-child(4){animation-delay:0.4s;}
+.card:nth-child(5){animation-delay:0.5s;}
+.card:nth-child(6){animation-delay:0.6s;}
+.card:nth-child(7){animation-delay:0.7s;}
+.card:nth-child(8){animation-delay:0.8s;}
+
+@keyframes fadeIn{
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
-/* CURSOR GLOW */
-.glow{
+/* SPOTLIGHT */
+.spotlight{
     position:fixed;
-    width:200px;
-    height:200px;
-    background:radial-gradient(circle,#38bdf8,transparent);
+    width:300px;
+    height:300px;
     pointer-events:none;
     border-radius:50%;
+    background:radial-gradient(circle,rgba(56,189,248,0.25),transparent 70%);
     z-index:-1;
 }
 
-/* CANVAS */
+/* PARTICLES */
 canvas{
     position:fixed;
     top:0;
     left:0;
     z-index:-2;
 }
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:20px;
+    opacity:0.6;
+}
 </style>
 </head>
 
 <body>
 
+<div id="transition"></div>
+
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<div class="spotlight" id="spotlight"></div>
+<canvas id="particles"></canvas>
+
 <div class="navbar">
-    <h2>⚡ INSANE Dashboard</h2>
-    <input type="text" class="search" id="search" placeholder="Search...">
+    <div class="profile">
+        <h2>🚀 Web Tech Practicals</h2>
+        <small>
+            Shemphang Lyngdoh | BCA 2nd Semester (Section C)<br>
+            Assam Down town University
+        </small>
+    </div>
+    <input class="search" id="search" placeholder="Search...">
 </div>
 
-<div class="grid" id="grid">
+<div class="grid">
 
-<div class="card" data-name="15a html css">
-<h3>Practical 15A</h3>
-<p>Layout</p>
-<span class="tag">HTML</span>
-<span class="tag">CSS</span>
+<div class="card" data-name="15a" data-link="HTML/practical15a.html">
+<h2>PRACTICAL 15(A)</h2>
+<p>Basic HTML Structure</p>
+<span class="tag html">HTML</span>
+<span class="tag css">CSS</span>
 </div>
 
-<div class="card" data-name="15b html css">
-<h3>Practical 15B</h3>
-<p>Responsive</p>
-<span class="tag">HTML</span>
-<span class="tag">CSS</span>
+<div class="card" data-name="15b" data-link="HTML/practical15b.html">
+<h2>PRACTICAL 15(B)</h2>
+<p>Images & Attributes</p>
+<span class="tag html">HTML</span>
+<span class="tag css">CSS</span>
 </div>
 
-<div class="card" data-name="15c html css js">
-<h3>Practical 15C</h3>
-<p>Interactive</p>
-<span class="tag">HTML</span>
-<span class="tag">CSS</span>
-<span class="tag">JS</span>
+<div class="card" data-name="15c" data-link="HTML/practical15c.html">
+<h2>PRACTICAL 15(C)</h2>
+<p>External CSS</p>
+<span class="tag html">HTML</span>
+<span class="tag css">CSS</span>
+</div>
+
+<div class="card" data-name="16" data-link="HTML/practical16.html">
+<h2>PRACTICAL 16</h2>
+<p>Responsive Layout</p>
+<span class="tag html">HTML</span>
+<span class="tag css">CSS</span>
+</div>
+
+<div class="card" data-name="17" data-link="HTML/practical17.html">
+<h2>PRACTICAL 17</h2>
+<p>JavaScript Basics</p>
+<span class="tag html">HTML</span>
+<span class="tag css">CSS</span>
+<span class="tag js">JS</span>
+</div>
+
+<div class="card" data-name="18a" data-link="HTML/practical18.html">
+<h2>PRACTICAL 18(A)</h2>
+<p>Login Validation</p>
+<span class="tag html">HTML</span>
+<span class="tag css">CSS</span>
+<span class="tag js">JS</span>
+</div>
+
+<div class="card" data-name="18b" data-link="HTML/practical18b.html">
+<h2>PRACTICAL 18(B)</h2>
+<p>Register Validation</p>
+<span class="tag html">HTML</span>
+<span class="tag css">CSS</span>
+<span class="tag js">JS</span>
+</div>
+
+<div class="card" data-name="19" data-link="HTML/practical19.html">
+<h2>PRACTICAL 19</h2>
+<p>JS Built-in Objects</p>
+<span class="tag html">HTML</span>
+<span class="tag css">CSS</span>
+<span class="tag js">JS</span>
 </div>
 
 </div>
 
-<div class="glow" id="glow"></div>
-<canvas id="canvas"></canvas>
+<footer>
+© 2026 Web Technology Practicals
+</footer>
 
 <script>
 
-/* GLOW CURSOR */
-document.addEventListener("mousemove",e=>{
-    let g=document.getElementById("glow");
-    g.style.left=e.clientX-100+"px";
-    g.style.top=e.clientY-100+"px";
-});
-
-/* MAGNETIC CARD */
-document.querySelectorAll(".card").forEach(card=>{
-    card.addEventListener("mousemove",e=>{
-        let x=e.offsetX/20;
-        let y=e.offsetY/20;
-        card.style.transform=`rotateX(${y}deg) rotateY(${x}deg)`;
-    });
-    card.addEventListener("mouseleave",()=>{
-        card.style.transform="rotateX(0) rotateY(0)";
-    });
-});
+/* ENTER ANIMATION (REMOVE BLACK SCREEN) */
+window.onload = ()=>{
+    document.getElementById("transition").style.opacity=0;
+};
 
 /* SEARCH */
 document.getElementById("search").addEventListener("keyup",function(){
     let val=this.value.toLowerCase();
-    document.querySelectorAll(".card").forEach(c=>{
-        c.style.display = c.dataset.name.includes(val) ? "block":"none";
+    document.querySelectorAll(".card").forEach(card=>{
+        card.style.display = card.dataset.name.includes(val) ? "block":"none";
     });
 });
 
-/* PARTICLE NETWORK */
-const canvas=document.getElementById("canvas");
+/* SPOTLIGHT */
+document.addEventListener("mousemove",e=>{
+    let s=document.getElementById("spotlight");
+    s.style.left=(e.clientX-150)+"px";
+    s.style.top=(e.clientY-150)+"px";
+});
+
+/* MAGNETIC */
+document.querySelectorAll(".card").forEach(card=>{
+    card.addEventListener("mousemove",e=>{
+        let rect=card.getBoundingClientRect();
+        let x=e.clientX-rect.left;
+        let y=e.clientY-rect.top;
+
+        let rotateX=(y-rect.height/2)/12;
+        let rotateY=(rect.width/2-x)/12;
+
+        card.style.transform=`rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+    });
+
+    card.addEventListener("mouseleave",()=>{
+        card.style.transform="rotateX(0) rotateY(0)";
+    });
+
+    /* EXIT ANIMATION */
+    card.addEventListener("click",()=>{
+        let link=card.getAttribute("data-link");
+        let t=document.getElementById("transition");
+
+        t.style.opacity=1;
+
+        setTimeout(()=>{
+            window.location=link;
+        },600);
+    });
+});
+
+/* PARTICLES */
+const canvas=document.getElementById("particles");
 const ctx=canvas.getContext("2d");
 
 canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
 
 let particles=[];
-for(let i=0;i<80;i++){
+
+for(let i=0;i<50;i++){
     particles.push({
         x:Math.random()*canvas.width,
         y:Math.random()*canvas.height,
-        vx:Math.random()-0.5,
-        vy:Math.random()-0.5
+        size:Math.random()*2,
+        speed:Math.random()*0.5
     });
 }
 
-function draw(){
+function animate(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
 
+    ctx.fillStyle="#38bdf8";
+
     particles.forEach(p=>{
-        p.x+=p.vx;
-        p.y+=p.vy;
-
-        if(p.x<0||p.x>canvas.width)p.vx*=-1;
-        if(p.y<0||p.y>canvas.height)p.vy*=-1;
-
         ctx.beginPath();
-        ctx.arc(p.x,p.y,2,0,Math.PI*2);
-        ctx.fillStyle="#38bdf8";
+        ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
         ctx.fill();
+
+        p.y+=p.speed;
+        if(p.y>canvas.height)p.y=0;
     });
 
-    // lines
-    for(let i=0;i<particles.length;i++){
-        for(let j=i;j<particles.length;j++){
-            let dx=particles[i].x-particles[j].x;
-            let dy=particles[i].y-particles[j].y;
-            let dist=Math.sqrt(dx*dx+dy*dy);
-
-            if(dist<120){
-                ctx.strokeStyle="rgba(56,189,248,0.2)";
-                ctx.beginPath();
-                ctx.moveTo(particles[i].x,particles[i].y);
-                ctx.lineTo(particles[j].x,particles[j].y);
-                ctx.stroke();
-            }
-        }
-    }
-
-    requestAnimationFrame(draw);
+    requestAnimationFrame(animate);
 }
-draw();
+animate();
 
 </script>
 
