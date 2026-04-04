@@ -2,226 +2,217 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Ultimate Dashboard</title>
+<title>INSANE Dashboard</title>
 
 <style>
-* {margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif;}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
 
-body {
-    background:#020617;
+body{
+    background:linear-gradient(270deg,#020617,#0f172a,#020617);
+    background-size:400% 400%;
+    animation:bgMove 10s infinite linear;
     color:white;
     overflow:hidden;
 }
 
-/* LOADER */
-#loader {
-    position:fixed;
-    width:100%;
-    height:100%;
-    background:#020617;
+@keyframes bgMove{
+    0%{background-position:0%}
+    100%{background-position:100%}
+}
+
+/* NAVBAR */
+.navbar{
     display:flex;
-    justify-content:center;
-    align-items:center;
-    z-index:999;
-}
-
-/* TRANSITION */
-#transition {
-    position:fixed;
-    width:100%;
-    height:100%;
-    background:black;
-    top:0;
-    left:0;
-    z-index:998;
-    opacity:0;
-    pointer-events:none;
-    transition:0.5s;
-}
-
-/* PARTICLES */
-#particles {
-    position:fixed;
-    width:100%;
-    height:100%;
-    z-index:-1;
-}
-
-/* SIDEBAR */
-.sidebar {
-    width:220px;
-    height:100vh;
-    position:fixed;
+    justify-content:space-between;
+    padding:15px 25px;
+    backdrop-filter:blur(15px);
     background:rgba(255,255,255,0.05);
-    backdrop-filter:blur(12px);
-    padding:20px;
 }
 
-.sidebar a {
-    display:block;
-    margin:10px 0;
-    color:#94a3b8;
-    text-decoration:none;
-}
-
-/* MAIN */
-.main {
-    margin-left:240px;
-    padding:30px;
-}
-
-/* TYPING */
-#typing {
-    font-size:28px;
-    margin-bottom:20px;
+/* SEARCH */
+.search{
+    padding:8px;
+    border-radius:8px;
+    border:none;
 }
 
 /* GRID */
-.grid {
+.grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
     gap:25px;
+    padding:30px;
 }
 
 /* CARD */
-.card {
-    padding:30px;
-    border-radius:15px;
+.card{
+    padding:25px;
+    border-radius:18px;
     background:rgba(255,255,255,0.05);
-    text-align:center;
+    backdrop-filter:blur(10px);
     transition:0.3s;
+    position:relative;
     transform-style:preserve-3d;
 }
 
-.card:hover {
-    box-shadow:0 0 25px #0ea5e9;
+.card:hover{
+    box-shadow:0 0 40px #38bdf8;
 }
 
-.card a {
-    color:white;
-    text-decoration:none;
-    font-weight:bold;
+/* TAG */
+.tag{
+    font-size:12px;
+    background:#0ea5e9;
+    padding:4px 8px;
+    border-radius:6px;
+    margin:2px;
 }
 
-/* GLOW */
-.glow {
+/* CURSOR GLOW */
+.glow{
     position:fixed;
-    width:150px;
-    height:150px;
-    background:radial-gradient(circle, rgba(14,165,233,0.5), transparent);
+    width:200px;
+    height:200px;
+    background:radial-gradient(circle,#38bdf8,transparent);
     pointer-events:none;
     border-radius:50%;
+    z-index:-1;
+}
+
+/* CANVAS */
+canvas{
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:-2;
 }
 </style>
 </head>
 
 <body>
 
-<div id="loader">Loading...</div>
-<div id="transition"></div>
+<div class="navbar">
+    <h2>⚡ INSANE Dashboard</h2>
+    <input type="text" class="search" id="search" placeholder="Search...">
+</div>
 
-<canvas id="particles"></canvas>
+<div class="grid" id="grid">
+
+<div class="card" data-name="15a html css">
+<h3>Practical 15A</h3>
+<p>Layout</p>
+<span class="tag">HTML</span>
+<span class="tag">CSS</span>
+</div>
+
+<div class="card" data-name="15b html css">
+<h3>Practical 15B</h3>
+<p>Responsive</p>
+<span class="tag">HTML</span>
+<span class="tag">CSS</span>
+</div>
+
+<div class="card" data-name="15c html css js">
+<h3>Practical 15C</h3>
+<p>Interactive</p>
+<span class="tag">HTML</span>
+<span class="tag">CSS</span>
+<span class="tag">JS</span>
+</div>
+
+</div>
+
 <div class="glow" id="glow"></div>
-
-<div class="sidebar">
-    <h2>🚀 Dashboard</h2>
-</div>
-
-<div class="main">
-
-    <div id="typing"></div>
-
-    <div class="grid">
-        <div class="card"><a href="HTML/practical15a.html">Practical 15a</a></div>
-         <div class="card"><a href="HTML/practical15a.html">Practical 15b</a></div>
-         <div class="card"><a href="HTML/practical15a.html">Practical 15c</a></div>
-        <div class="card"><a href="HTML/practical16.html">Practical 16</a></div>
-        <div class="card"><a href="HTML/practical17.html">Practical 17</a></div>
-        <div class="card"><a href="HTML/practical18.html">Practical 18</a></div>
-        <div class="card"><a href="HTML/practical18b.html">Practical 18b</a></div>
-        <div class="card"><a href="HTML/practical19.html">Practical 19</a></div>
-    </div>
-
-</div>
-
-<audio id="clickSound" src="https://www.soundjay.com/buttons/sounds/button-16.mp3"></audio>
+<canvas id="canvas"></canvas>
 
 <script>
-// LOADER
-window.onload = () => {
-    document.getElementById("loader").style.display = "none";
-};
 
-// TYPING EFFECT
-let text = "⚡ Web Technology Practicals - Shemphang Lyngdoh";
-let i = 0;
-function typing() {
-    if(i < text.length){
-        document.getElementById("typing").innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typing, 40);
-    }
-}
-typing();
-
-// PARTICLES
-const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let particles = [];
-for(let i=0;i<100;i++){
-    particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,size:Math.random()*2});
-}
-
-function animate(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    ctx.fillStyle="#38bdf8";
-    particles.forEach(p=>{
-        ctx.beginPath();
-        ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
-        ctx.fill();
-        p.y+=0.5;
-        if(p.y>canvas.height)p.y=0;
-    });
-    requestAnimationFrame(animate);
-}
-animate();
-
-// GLOW
-document.addEventListener("mousemove", e=>{
-    let glow=document.getElementById("glow");
-    glow.style.left=e.clientX+"px";
-    glow.style.top=e.clientY+"px";
+/* GLOW CURSOR */
+document.addEventListener("mousemove",e=>{
+    let g=document.getElementById("glow");
+    g.style.left=e.clientX-100+"px";
+    g.style.top=e.clientY-100+"px";
 });
 
-// CLICK SOUND + TRANSITION
-document.querySelectorAll("a").forEach(link=>{
-    link.addEventListener("click", e=>{
-        e.preventDefault();
-        document.getElementById("clickSound").play();
-        let t=document.getElementById("transition");
-        t.style.opacity=1;
-        setTimeout(()=>{window.location=link.href},500);
-    });
-});
-
-// 3D TILT
+/* MAGNETIC CARD */
 document.querySelectorAll(".card").forEach(card=>{
-    card.addEventListener("mousemove", e=>{
-        let x=e.offsetX;
-        let y=e.offsetY;
-        let centerX=card.offsetWidth/2;
-        let centerY=card.offsetHeight/2;
-        let rotateX=(y-centerY)/10;
-        let rotateY=(centerX-x)/10;
-        card.style.transform=`rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    card.addEventListener("mousemove",e=>{
+        let x=e.offsetX/20;
+        let y=e.offsetY/20;
+        card.style.transform=`rotateX(${y}deg) rotateY(${x}deg)`;
     });
-    card.addEventListener("mouseleave", ()=>{
+    card.addEventListener("mouseleave",()=>{
         card.style.transform="rotateX(0) rotateY(0)";
     });
 });
+
+/* SEARCH */
+document.getElementById("search").addEventListener("keyup",function(){
+    let val=this.value.toLowerCase();
+    document.querySelectorAll(".card").forEach(c=>{
+        c.style.display = c.dataset.name.includes(val) ? "block":"none";
+    });
+});
+
+/* PARTICLE NETWORK */
+const canvas=document.getElementById("canvas");
+const ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+for(let i=0;i<80;i++){
+    particles.push({
+        x:Math.random()*canvas.width,
+        y:Math.random()*canvas.height,
+        vx:Math.random()-0.5,
+        vy:Math.random()-0.5
+    });
+}
+
+function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    particles.forEach(p=>{
+        p.x+=p.vx;
+        p.y+=p.vy;
+
+        if(p.x<0||p.x>canvas.width)p.vx*=-1;
+        if(p.y<0||p.y>canvas.height)p.vy*=-1;
+
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,2,0,Math.PI*2);
+        ctx.fillStyle="#38bdf8";
+        ctx.fill();
+    });
+
+    // lines
+    for(let i=0;i<particles.length;i++){
+        for(let j=i;j<particles.length;j++){
+            let dx=particles[i].x-particles[j].x;
+            let dy=particles[i].y-particles[j].y;
+            let dist=Math.sqrt(dx*dx+dy*dy);
+
+            if(dist<120){
+                ctx.strokeStyle="rgba(56,189,248,0.2)";
+                ctx.beginPath();
+                ctx.moveTo(particles[i].x,particles[i].y);
+                ctx.lineTo(particles[j].x,particles[j].y);
+                ctx.stroke();
+            }
+        }
+    }
+
+    requestAnimationFrame(draw);
+}
+draw();
+
 </script>
 
 </body>
