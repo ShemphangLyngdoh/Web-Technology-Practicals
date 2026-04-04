@@ -5,23 +5,24 @@
 <title>Ultimate Dashboard</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Segoe UI',sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
 
 body{
-    background:linear-gradient(270deg,#020617,#0f172a,#020617);
-    background-size:400% 400%;
-    animation:bgMove 12s infinite linear;
+    background:#020617;
     color:white;
+    overflow:hidden;
 }
 
-@keyframes bgMove{
-    0%{background-position:0%}
-    100%{background-position:100%}
+/* LOADER */
+#loader{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:#020617;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:999;
 }
 
 /* TRANSITION */
@@ -30,218 +31,302 @@ body{
     width:100%;
     height:100%;
     background:black;
-    opacity:1;
-    z-index:999;
-    transition:0.6s;
+    top:0;
+    left:0;
+    z-index:998;
+    opacity:0;
+    pointer-events:none;
+    transition:0.5s;
 }
 
-/* NAVBAR */
-.navbar{
-    display:flex;
-    justify-content:space-between;
-    padding:15px 30px;
-    backdrop-filter:blur(12px);
+/* PARTICLES */
+#particles{
+    position:fixed;
+    width:100%;
+    height:100%;
+    z-index:-1;
+}
+
+/* SIDEBAR */
+.sidebar{
+    width:240px;
+    height:100vh;
+    position:fixed;
     background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(12px);
+    padding:20px;
 }
 
-.navbar h2{
-    background:linear-gradient(90deg,#38bdf8,#6366f1);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
+.sidebar h2{
+    margin-bottom:10px;
 }
 
-.profile small{
+.sidebar small{
     font-size:12px;
     opacity:0.7;
 }
 
-/* SEARCH */
-.search{
-    padding:8px;
-    border-radius:8px;
-    border:none;
+/* MAIN */
+.main{
+    margin-left:260px;
+    padding:30px;
+}
+
+/* TYPING */
+#typing{
+    font-size:26px;
+    margin-bottom:20px;
+    color:#38bdf8;
 }
 
 /* GRID */
 .grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:25px;
-    padding:30px;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
 }
 
-/* CARD (NOW <a>) */
+/* CARD */
 .card{
-    text-decoration:none;
-    color:white;
     padding:25px;
-    border-radius:18px;
+    border-radius:15px;
     background:rgba(255,255,255,0.05);
+    text-align:center;
     transition:0.3s;
-    border:1px solid rgba(255,255,255,0.08);
+}
+
+.card:hover{
+    transform:translateY(-8px) scale(1.03);
+    box-shadow:0 0 25px #0ea5e9;
+}
+
+/* LINK */
+.card a{
+    color:white;
+    text-decoration:none;
     display:block;
 }
 
-/* HOVER */
-.card:hover{
-    transform:translateY(-8px) scale(1.03);
-    box-shadow:0 0 25px #38bdf8;
-}
-
 /* TAGS */
-.tag{
-    display:inline-block;
-    padding:5px 10px;
-    border-radius:20px;
-    font-size:12px;
+.tags{
     margin-top:10px;
 }
-.html{background:#ef4444;}
-.css{background:#6366f1;}
-.js{background:#facc15;color:black;}
 
-/* ENTRY */
-.card{
-    opacity:0;
-    transform:translateY(30px);
-    animation:fadeIn 0.6s forwards;
-}
-.card:nth-child(1){animation-delay:0.1s;}
-.card:nth-child(2){animation-delay:0.2s;}
-.card:nth-child(3){animation-delay:0.3s;}
-.card:nth-child(4){animation-delay:0.4s;}
-.card:nth-child(5){animation-delay:0.5s;}
-.card:nth-child(6){animation-delay:0.6s;}
-.card:nth-child(7){animation-delay:0.7s;}
-.card:nth-child(8){animation-delay:0.8s;}
-
-@keyframes fadeIn{
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+.tag{
+    display:inline-block;
+    padding:4px 8px;
+    margin:2px;
+    border-radius:6px;
+    font-size:12px;
 }
 
-/* FOOTER */
-footer{
-    text-align:center;
-    padding:20px;
-    opacity:0.6;
+.html{background:#3bcd0a;}
+.css{background:#dbc504;}
+.js{background:#d70505;color:black;}
+
+/* GLOW */
+.glow{
+    position:fixed;
+    width:150px;
+    height:150px;
+    background:radial-gradient(circle, rgba(14,165,233,0.5), transparent);
+    pointer-events:none;
+    border-radius:50%;
 }
 </style>
 </head>
 
 <body>
 
+<div id="loader">⚡ Loading...</div>
 <div id="transition"></div>
 
-<div class="navbar">
-    <div class="profile">
-        <h2>🚀 Web Tech Practicals</h2>
-        <small>
-            Shemphang Lyngdoh | BCA 2nd Semester (Section C)<br>
-            Assam Downtown University
-        </small>
-    </div>
-    <input class="search" id="search" placeholder="Search...">
+<canvas id="particles"></canvas>
+<div class="glow" id="glow"></div>
+
+<div class="sidebar">
+    <h2>🚀 Dashboard</h2>
+    <small>
+        Shemphang Lyngdoh<br>
+        BCA 2nd Semester (Section: 'C')<br>
+        Assam Down town University<br>
+        Roll No: ADTU/1/2025-28/BCAO/005<br>
+    </small>
 </div>
+
+<div class="main">
+
+<div id="typing"></div>
 
 <div class="grid">
 
-<a href="HTML/practical15a.html" class="card" data-name="15a">
-<h2>PRACTICAL 15(A)</h2>
-<p>Basic HTML Structure</p>
+<div class="card">
+<a href="../HTML/practical15a.html">
+Practical 15A
+<div class="tags">
 <span class="tag html">HTML</span>
 <span class="tag css">CSS</span>
+</div>
 </a>
-
-<a href="HTML/practical15b.html" class="card" data-name="15b">
-<h2>PRACTICAL 15(B)</h2>
-<p>Images & Attributes</p>
-<span class="tag html">HTML</span>
-<span class="tag css">CSS</span>
-</a>
-
-<a href="HTML/practical15c.html" class="card" data-name="15c">
-<h2>PRACTICAL 15(C)</h2>
-<p>External CSS</p>
-<span class="tag html">HTML</span>
-<span class="tag css">CSS</span>
-</a>
-
-<a href="HTML/practical16.html" class="card" data-name="16">
-<h2>PRACTICAL 16</h2>
-<p>Responsive Layout</p>
-<span class="tag html">HTML</span>
-<span class="tag css">CSS</span>
-</a>
-
-<a href="HTML/practical17.html" class="card" data-name="17">
-<h2>PRACTICAL 17</h2>
-<p>JavaScript Basics</p>
-<span class="tag html">HTML</span>
-<span class="tag css">CSS</span>
-<span class="tag js">JS</span>
-</a>
-
-<a href="HTML/practical18.html" class="card" data-name="18a">
-<h2>PRACTICAL 18(A)</h2>
-<p>Login Validation</p>
-<span class="tag html">HTML</span>
-<span class="tag css">CSS</span>
-<span class="tag js">JS</span>
-</a>
-
-<a href="HTML/practical18b.html" class="card" data-name="18b">
-<h2>PRACTICAL 18(B)</h2>
-<p>Register Validation</p>
-<span class="tag html">HTML</span>
-<span class="tag css">CSS</span>
-<span class="tag js">JS</span>
-</a>
-
-<a href="HTML/practical19.html" class="card" data-name="19">
-<h2>PRACTICAL 19</h2>
-<p>JS Built-in Objects</p>
-<span class="tag html">HTML</span>
-<span class="tag css">CSS</span>
-<span class="tag js">JS</span>
-</a>
-
 </div>
 
-<footer>
-© 2026 Web Technology Practicals
-</footer>
+<div class="card">
+<a href="../HTML/practical15b.html">
+Practical 15B
+<div class="tags">
+<span class="tag html">HTML</span>
+<span class="tag css">CSS</span>
+</div>
+</a>
+</div>
+
+<div class="card">
+<a href="../HTML/practical15c.html">
+Practical 15C
+<div class="tags">
+<span class="tag html">HTML</span>
+<span class="tag css">CSS</span>
+</div>
+</a>
+</div>
+
+<div class="card">
+<a href="../HTML/practical16.html">
+Practical 16
+<div class="tags">
+<span class="tag html">HTML</span>
+<span class="tag css">CSS</span>
+</div>
+</a>
+</div>
+
+<div class="card">
+<a href="../HTML/practical17.html">
+Practical 17
+<div class="tags">
+<span class="tag html">HTML</span>
+<span class="tag css">CSS</span>
+<span class="tag js">JS</span>
+</div>
+</a>
+</div>
+
+<div class="card">
+<a href="../HTML/practical18.html">
+Practical 18A
+<div class="tags">
+<span class="tag html">HTML</span>
+<span class="tag css">CSS</span>
+<span class="tag js">JS</span>
+</div>
+</a>
+</div>
+
+<div class="card">
+<a href="../HTML/practical18b.html">
+Practical 18B
+<div class="tags">
+<span class="tag html">HTML</span>
+<span class="tag css">CSS</span>
+<span class="tag js">JS</span>
+</div>
+</a>
+</div>
+
+<div class="card">
+<a href="../HTML/practical19.html">
+Practical 19
+<div class="tags">
+<span class="tag html">HTML</span>
+<span class="tag css">CSS</span>
+<span class="tag js">JS</span>
+</div>
+</a>
+</div>
+
+</div>
+</div>
+
+<audio id="clickSound" src="https://www.soundjay.com/buttons/sounds/button-16.mp3"></audio>
 
 <script>
 
-/* PAGE ENTER */
+/* LOADER */
 window.onload = ()=>{
-    document.getElementById("transition").style.opacity=0;
+    document.getElementById("loader").style.display="none";
 };
 
-/* SEARCH */
-document.getElementById("search").addEventListener("keyup",function(){
-    let val=this.value.toLowerCase();
-    document.querySelectorAll(".card").forEach(card=>{
-        card.style.display = card.dataset.name.includes(val) ? "block":"none";
+/* TYPING */
+let text="⚡ Web Technology Practicals - Shemphang Lyngdoh";
+let i=0;
+function typing(){
+    if(i<text.length){
+        document.getElementById("typing").innerHTML+=text[i];
+        i++;
+        setTimeout(typing,40);
+    }
+}
+typing();
+
+/* PARTICLES */
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+for(let i=0;i<80;i++){
+    particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,size:Math.random()*2});
+}
+
+function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle="#38bdf8";
+
+    particles.forEach(p=>{
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+        ctx.fill();
+        p.y+=0.4;
+        if(p.y>canvas.height)p.y=0;
+    });
+
+    requestAnimationFrame(animate);
+}
+animate();
+
+/* GLOW */
+document.addEventListener("mousemove",e=>{
+    let glow=document.getElementById("glow");
+    glow.style.left=e.clientX+"px";
+    glow.style.top=e.clientY+"px";
+});
+
+/* CLICK SOUND + TRANSITION (SAFE) */
+document.querySelectorAll(".card a").forEach(link=>{
+    link.addEventListener("click",function(){
+        document.getElementById("clickSound").play();
+        let t=document.getElementById("transition");
+        t.style.opacity=1;
     });
 });
 
-/* PAGE EXIT ANIMATION */
+/* FIXED 3D TILT */
 document.querySelectorAll(".card").forEach(card=>{
-    card.addEventListener("click",function(e){
-        e.preventDefault();
+    card.addEventListener("mousemove",e=>{
+        let x=e.offsetX;
+        let y=e.offsetY;
+        let centerX=card.offsetWidth/2;
+        let centerY=card.offsetHeight/2;
 
-        let link=this.href;
-        let t=document.getElementById("transition");
+        let rotateX=(y-centerY)/12;
+        let rotateY=(centerX-x)/12;
 
-        t.style.opacity=1;
+        card.style.transform=`rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    });
 
-        setTimeout(()=>{
-            window.location=link;
-        },500);
+    card.addEventListener("mouseleave",()=>{
+        card.style.transform="rotateX(0) rotateY(0)";
     });
 });
 
