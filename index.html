@@ -10,7 +10,8 @@
 body{
     background:#020617;
     color:white;
-    overflow:hidden;
+    overflow-y:auto;   /* ✅ SCROLL ENABLED */
+    overflow-x:hidden; /* ✅ NO SIDE SCROLL */
 }
 
 /* LOADER */
@@ -160,6 +161,8 @@ body{
 
 <div class="grid">
 
+<!-- ✅ YOUR ORIGINAL CARDS (UNCHANGED) -->
+
      <div class="card">
 <a href="HTML/practical1.html">
 Practical 1
@@ -168,7 +171,6 @@ Practical 1
 </div>
 </a>
 </div>
-
 
      <div class="card">
 <a href="HTML/practical2.html">
@@ -179,7 +181,6 @@ Practical 2
 </a>
 </div>
 
-
      <div class="card">
 <a href="HTML/practical3.html">
 Practical 3
@@ -188,7 +189,6 @@ Practical 3
 </div>
 </a>
 </div>
-
 
      <div class="card">
 <a href="HTML/practical4.html">
@@ -199,7 +199,6 @@ Practical 4
 </a>
 </div>
 
-
      <div class="card">
 <a href="HTML/practical5.html">
 Practical 5
@@ -208,7 +207,6 @@ Practical 5
 </div>
 </a>
 </div>
-
 
      <div class="card">
 <a href="HTML/practical6.html">
@@ -219,7 +217,6 @@ Practical 6
 </a>
 </div>
 
-
      <div class="card">
 <a href="HTML/practical7.html">
 Practical 7
@@ -228,7 +225,6 @@ Practical 7
 </div>
 </a>
 </div>
-
 
      <div class="card">
 <a href="HTML/practical8.html">
@@ -239,7 +235,6 @@ Practical 8
 </a>
 </div>
 
-
      <div class="card">
 <a href="HTML/practical9.html">
 Practical 9
@@ -248,7 +243,6 @@ Practical 9
 </div>
 </a>
 </div>
-
 
      <div class="card">
 <a href="HTML/practical10.html">
@@ -259,7 +253,6 @@ Practical 10
 </a>
 </div>
 
-
      <div class="card">
 <a href="HTML/practical11.html">
 Practical 11
@@ -268,7 +261,6 @@ Practical 11
 </div>
 </a>
 </div>
-
 
      <div class="card">
 <a href="HTML/practical12.html">
@@ -279,7 +271,6 @@ Practical 12
 </a>
 </div>
 
-
      <div class="card">
 <a href="HTML/practical13.html">
 Practical 13
@@ -288,7 +279,6 @@ Practical 13
 </div>
 </a>
 </div>
-
 
     <div class="card">
 <a href="HTML/practical14.html">
@@ -461,30 +451,8 @@ Practical 26
 </div>
 
 <div class="card">
-<a href="HTML/practical21.html">
-Practical 21
-<div class="tags">
-<span class="tag html">HTML</span>
-<span class="tag css">CSS</span>
-<span class="tag js">JS</span>
-</div>
-</a>
-</div>
-
-<div class="card">
 <a href="HTML/practical27.html">
 Practical 27
-<div class="tags">
-<span class="tag html">HTML</span>
-<span class="tag css">CSS</span>
-<span class="tag js">JS</span>
-</div>
-</a>
-</div>
-
-<div class="card">
-<a href="HTML/practical21.html">
-Practical 21
 <div class="tags">
 <span class="tag html">HTML</span>
 <span class="tag css">CSS</span>
@@ -505,30 +473,8 @@ Practical 28
 </div>
 
 <div class="card">
-<a href="HTML/practical21.html">
-Practical 21
-<div class="tags">
-<span class="tag html">HTML</span>
-<span class="tag css">CSS</span>
-<span class="tag js">JS</span>
-</div>
-</a>
-</div>
-
-<div class="card">
 <a href="HTML/practical29.html">
 Practical 29
-<div class="tags">
-<span class="tag html">HTML</span>
-<span class="tag css">CSS</span>
-<span class="tag js">JS</span>
-</div>
-</a>
-</div>
-
-<div class="card">
-<a href="HTML/practical21.html">
-Practical 21
 <div class="tags">
 <span class="tag html">HTML</span>
 <span class="tag css">CSS</span>
@@ -560,7 +506,7 @@ window.onload = ()=>{
     document.getElementById("loader").style.display="none";
 };
 
-/* FIX: BACK BUTTON (REMOVE BLACK SCREEN) */
+/* FIX: BACK BUTTON */
 window.onpageshow = function(){
     document.getElementById("transition").style.opacity=0;
 };
@@ -611,19 +557,14 @@ document.addEventListener("mousemove",e=>{
     glow.style.top=e.clientY+"px";
 });
 
-/* FIXED CLICK (BACK BUTTON WORKS) */
+/* CLICK */
 document.querySelectorAll(".card a").forEach(link=>{
     link.addEventListener("click",function(e){
-
-        e.preventDefault(); // IMPORTANT
-
+        e.preventDefault();
         let url=this.href;
-
         document.getElementById("clickSound").play();
-
         let t=document.getElementById("transition");
         t.style.opacity=1;
-
         setTimeout(()=>{
             window.location.href=url;
         },500);
@@ -637,10 +578,8 @@ document.querySelectorAll(".card").forEach(card=>{
         let y=e.offsetY;
         let centerX=card.offsetWidth/2;
         let centerY=card.offsetHeight/2;
-
         let rotateX=(y-centerY)/12;
         let rotateY=(centerX-x)/12;
-
         card.style.transform=`rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
     });
 
