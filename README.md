@@ -62,6 +62,7 @@ It combines HTML, CSS, and JavaScript to create an interactive and visually appe
 * Practical 18
 * Practical 18b
 * Practical 19
+* Practical 20
 * Practical 21
 * Practical 22 
 * Practical 23
