@@ -41,14 +41,38 @@ It combines HTML, CSS, and JavaScript to create an interactive and visually appe
 ---
 
 ## 📘 Practicals Included
-* Practical 15a
-* Practical 15b
+* Practical 1
+*  Practical 2
+*  Practical 3
+*  Practical 4
+*  Practical 5
+*  Practical 6
+*  Practical 7
+*  Practical 8
+*  Practical 9
+*  Practical 10
+*  Practical 11
+*  Practical 12
+*  Practical 13
+*  Practical 14
+* Practical 15 * Practical 15b
 * Practical 15c
 * Practical 16
 * Practical 17
 * Practical 18
 * Practical 18b
 * Practical 19
+* Practical 21
+* Practical 22 
+* Practical 23
+* Practical 24
+* Practical 25
+* Practical 26
+* Practical 27
+* Practical 28 
+* Practical 29 
+* Practical 30
+* **Practical**
 
 ---
 
